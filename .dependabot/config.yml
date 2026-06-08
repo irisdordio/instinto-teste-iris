@@ -1,14 +1,19 @@
-version: 1
-
-update_configs:
-  - package_manager: javascript
-    directory: /
-    update_schedule: live
-    allowed_updates:
-      - match:
-          update_type: security
-    automerged_updates:
-      - match:
-          dependency_type: all
-          update_type: in_range
-    version_requirement_updates: widen_ranges
+backend:
+  name: git-gateway
+  branch: main
+media_folder: "static/img"
+public_folder: "/img"
+collections:
+  - name: "animais"
+    label: "Animais para Adoção"
+    folder: "src/content/posts"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Nome do Animal", name: "title", widget: "string"}
+      - {label: "Data de Publicação", name: "date", widget: "datetime"}
+      - {label: "Espécie", name: "especie", widget: "select", options: ["Cão", "Gato", "Outro"], default: "Cão"}
+      - {label: "Estado", name: "estado", widget: "select", options: ["Disponível", "Em Adoção", "Adotado"], default: "Disponível"}
+      - {label: "Resumo Rápido", name: "description", widget: "text", hint: "Uma ou duas frases para aparecer na lista de animais."}
+      - {label: "Foto Principal", name: "image", widget: "image"}
+      - {label: "História Completa", name: "body", widget: "markdown", hint: "A história do animal, temperamento, se é bom com crianças, etc."}
